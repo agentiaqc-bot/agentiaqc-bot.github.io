@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="fr-CA"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AgentiA Québec — Agents IA pour les métiers de service</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+/* Template scaffolding — page layout and web-scale sizing only; every color,
+   font, radius and shadow comes from ../../styles.css. The voice is the
+   deck's, re-derived for a scrolling page: an engineering document — Barlow
+   Condensed titles in uppercase over Barlow text, visible drawn structure
+   (1px caption rules; wireframe cells with registration-cross corners for
+   the feature cards — the system's own card grammar; a registration-marked
+   spec plate for the numbers), the steel accent as the single color,
+   photographs duotoned like screen prints.
+
+   THE RHYTHM: a 24px leading unit (16px Barlow body at 1.5 — the system's
+   0.85 density runs compact), 12px half-step; line-heights and block
+   margins in unit multiples, heads cap-trimmed, ?baselines/B to review.
+   The deck's seat-pinning relaxes to per-block discipline on a fluid page.
+   The system's own interface components keep their styles.css leading.
+
+   THE LANDING LAWS (shared by all six systems' landing templates):
+   #1 display headers break per sentence (.line spans); #2 the landing
+   advertises an invented product played straight — industry's is Holdfast,
+   a bolt-and-fastener catalog written like the datasheet it is; #3
+   spacing is cluster-scoped (display leading ratio-governed ≈1.04 for the
+   uppercase condensed — the display-block lattice exemption — tight
+   single-unit gaps inside a cluster, the air between sections); #4 no
+   hero eyebrow — the nav brand names the product.
+
+   Measured Barlow values carry verbatim from the deck template: optical
+   left alignment -0.052em where caps lead a condensed display line, quote
+   hang -0.316em (Condensed 600), attribution hang -0.885em (Regular). */
+:root {
+  --leading: 24px;
+  --half: 12px;
+  --edge: clamp(20px, 5vw, 72px);
+  --measure: 60ch;
+}
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { margin: 0; text-wrap: pretty; }
+.wrap { max-width: 1200px; margin: 0 auto; padding: 0 var(--edge); }
+/* the component demo pads the masthead with its own spacing; on the page the
+   masthead's contents take the page gutter and sit on the wrap's text axis
+   (padding-only — full-width paint such as a masthead rule is untouched) */
+.nav { padding-inline: max(var(--edge), calc((100% - 1200px) / 2 + var(--edge))); }
+.nav a { white-space: nowrap; }
+.nav a[aria-current='location'] { color: var(--color-accent-700); } /* in-page anchor,
+   not a page link — 'location' is the truthful value. The 700 step, not the
+   base accent: at 14px this is small text, where the base steel's 3.7:1
+   large-text value does not reach (5.8:1 measured — the same call broadsheet's
+   round 2 made, and the kickers already make here) */
+@media (max-width: 480px) { .nav a { display: none; } } /* phone width: the nav
+   keeps brand + the one action (layout-only — the component's look is untouched) */
+
+/* — caption rules (the deck's grammar: the label sits ABOVE a drawn 1px
+   rule and the content seats below it — structure made visible) — */
+.kicker {
+  display: block; font-size: 13px; line-height: var(--half);
+  letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600;
+  color: var(--color-accent-700); /* accent-colored small text takes the deep
+     step — 5.8:1, where the base steel is a 3.7:1 large-text value */
+  font-feature-settings: "tnum" 1;
+  margin: 0 0 var(--half);
+}
+.caption-rule { height: 1px; border: 0; margin: 0 0 calc(var(--leading) - var(--half));
+  background: var(--color-divider); }
+
+/* — hero — */
+.hero { padding: calc(4 * var(--leading)) 0 calc(3 * var(--leading)); }
+.display {
+  font-family: var(--font-heading); font-weight: var(--font-heading-weight);
+  font-size: clamp(48px, 7vw, 96px);
+  line-height: clamp(50px, 7.3vw, 100px); /* law #3: ratio-governed ≈1.04, a
+     deliberate step below the lowercase systems' 1.06-1.11 band — uppercase
+     condensed carries no descenders to clear; the display-block lattice
+     exemption */
+  letter-spacing: 0.01em; text-transform: uppercase; margin: 0;
+  margin-left: -0.052em; /* optical left alignment — the deck's measured Condensed 600 value */
+  text-box: trim-both cap alphabetic;
+}
+.display .line { display: block; } /* law #1 */
+.hero .sub { font-size: 16px; line-height: var(--leading); max-width: var(--measure);
+  margin: calc(1.5 * var(--leading) - 1cap) 0 0;
+  text-box: trim-both cap alphabetic; }
+.hero .row { display: flex; gap: var(--space-3); flex-wrap: wrap; margin-top: var(--leading); }
+
+/* — the spec sheet (this system diverges from the shared stat-band chassis
+   here): where the chassis set four display numerals on a steel field,
+   Holdfast prints SHEET 01 of its own drawing set — a hairline-framed
+   plate with registration crosses (the frame every drawn object in this
+   system wears) carrying an engineering title block and the four product
+   claims as numbered datasheet rows. For a catalog "written like the
+   datasheet it is", tabulated data is the native grammar for numbers.
+   The steel ground leaves the page with the band — the deck's dividers
+   keep theirs, and the solid accent button returns to being the one
+   solid object on the board. Downstream sections number themselves into
+   the set with the deck's own kicker grammar ("02 · ").
+
+   Rhythm: the title block is a 2-unit band (24px line + half-step padding
+   each side, wrap-safe); header row 1.5 units, data rows 2 units, text
+   centered on its band (the documented optical row-centering exception —
+   no cap trim inside row bands, so the authored line boxes carry the
+   math); the plate's internal rules land on the band seams. Figures in
+   the table are COLUMNS and take tabular figures per the deck's figure
+   policy — the display-numeral proportional exception retired with the
+   stat band. The downstream kickers number into the set with the deck's
+   bare "NN · " grammar while only the plate says the word "Sheet" — the
+   linkage is deliberately soft; the sections read as numbered notes
+   around the one drawn sheet, not as four dressed plates. — */
+.sheet { padding: calc(3 * var(--leading)) 0 calc(2.5 * var(--leading)); }
+.plate { position: relative; border: 1px solid var(--color-divider); }
+.plate > .corner { position: absolute; width: 15px; height: 15px;
+  color: color-mix(in srgb, var(--color-text) 55%, transparent); pointer-events: none; }
+.plate > .corner::before { content: ""; position: absolute; left: 7px; top: 0; width: 1px; height: 100%; background: currentColor; }
+.plate > .corner::after  { content: ""; position: absolute; top: 7px; left: 0; width: 100%; height: 1px; background: currentColor; }
+.plate > .corner.tl { top: -8px; left: -8px; }
+.plate > .corner.tr { top: -8px; right: -8px; }
+.plate > .corner.bl { bottom: -8px; left: -8px; }
+.plate > .corner.br { bottom: -8px; right: -8px; }
+/* the title block — the drawing's own naming furniture: a flexing title
+   cell, then register cells (doc, revision, sheet count) divided by
+   hairlines, all at the kicker's scale. The title prints in full text
+   ink — it is the section's heading; the register cells take 70% ink,
+   5.8:1 measured on this ground, where the system's 55% furniture
+   convention is a large-text value (3.6:1) */
+.title-block { display: flex; flex-wrap: wrap; align-items: stretch;
+  border-bottom: 1px solid var(--color-divider); }
+.title-block > span { padding: var(--half) var(--leading);
+  font-size: 13px; line-height: var(--leading); letter-spacing: 0.08em;
+  text-transform: uppercase; font-weight: 600; font-feature-settings: "tnum" 1; }
+.tb-title { flex: 1; min-width: 16ch; }
+.tb-cell { border-left: 1px solid var(--color-divider); white-space: nowrap;
+  color: color-mix(in srgb, var(--color-text) 70%, transparent); }
+/* the spec table — the system's own .table component at landing scale (the
+   deck resizes it the same way). The № column takes the deep accent step,
+   the same call as the kickers (5.8:1 at 13px, where the base steel's
+   3.7:1 is a large-text value); values set in the condensed face at the
+   cell-heading scale, so the numbers stay the section's loudest objects */
+.spec { table-layout: fixed; }
+.spec col.c-num { width: calc(3 * var(--leading)); }
+.spec col.c-prop { width: 30%; }
+.spec col.c-val { width: 21%; }
+.spec th, .spec td { padding: var(--half) var(--leading) var(--half) 0; vertical-align: middle; }
+.spec th:first-child, .spec td:first-child { padding-left: var(--leading); }
+.spec th { font-size: 13px; line-height: var(--half); font-weight: 600; /* the
+     section's furniture weight — otherwise the UA's default th bold makes
+     the header row the sheet's only 700, by accident rather than decision */
+  color: color-mix(in srgb, var(--color-text) 70%, transparent); /* the component's
+     11px/60% header re-derived for the landing: 13px is still small text,
+     where 70% measures 5.8:1 and 60% falls short of 4.5:1 */ }
+.spec td { font-size: 15px; line-height: var(--leading); }
+.spec .s-num { font-size: 13px; font-weight: 600; letter-spacing: 0.08em;
+  color: var(--color-accent-700); font-feature-settings: "tnum" 1; }
+.spec .s-val { font-family: var(--font-heading); font-weight: var(--font-heading-weight);
+  font-size: 22px; line-height: var(--leading); letter-spacing: 0.02em;
+  font-feature-settings: "tnum" 1; white-space: nowrap; }
+.spec .s-rem { color: color-mix(in srgb, var(--color-text) 78%, transparent); }
+.spec tbody tr:last-child td { border-bottom: 0; } /* the notes rule closes the
+   rows — avoid a doubled line against .sheet-note's divider */
+.spec tbody tr:hover { background: none; } /* a printed sheet, not an
+   interactive grid */
+.sheet-note { margin: 0; padding: var(--half) var(--leading);
+  border-top: 1px solid var(--color-divider);
+  font-size: 13px; line-height: var(--leading);
+  color: color-mix(in srgb, var(--color-text) 70%, transparent); /* 5.8:1 — see .spec th */ }
+
+/* — wireframe feature cells (the system's OWN card grammar: square,
+   thin-bordered, registration-cross corners, no surface fill) — */
+.features { padding: calc(3 * var(--leading)) 0 calc(2.5 * var(--leading)); }
+.features > .caption-rule { margin-bottom: calc(var(--leading) + 8px); } /* the cells'
+   registration crosses hang 8px above the frame's padding edge (7px of ink
+   past the 1px border) — a drawn rule keeps one full unit of air to the
+   nearest ink, so the rule clears the cross ink by 25px, not a sliver */
+.cells { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(20px, 3vw, 48px);
+  margin-top: calc(var(--leading) - var(--half)); }
+.cell-frame { position: relative; border: 1px solid var(--color-divider);
+  padding: var(--leading); } /* one full unit on every side — the cap-trimmed
+     heading seats with the same air above it as the text keeps to the frame's
+     left and right */
+.cell-frame > .corner { position: absolute; width: 15px; height: 15px;
+  color: color-mix(in srgb, var(--color-text) 55%, transparent); pointer-events: none; }
+.cell-frame > .corner::before { content: ""; position: absolute; left: 7px; top: 0; width: 1px; height: 100%; background: currentColor; }
+.cell-frame > .corner::after  { content: ""; position: absolute; top: 7px; left: 0; width: 100%; height: 1px; background: currentColor; }
+.cell-frame > .corner.tl { top: -8px; left: -8px; }
+.cell-frame > .corner.tr { top: -8px; right: -8px; }
+.cell-frame > .corner.bl { bottom: -8px; left: -8px; }
+.cell-frame > .corner.br { bottom: -8px; right: -8px; }
+.cell-frame h2 { font-family: var(--font-heading); font-weight: var(--font-heading-weight);
+  font-size: 22px; line-height: var(--leading); letter-spacing: 0.02em; text-transform: uppercase;
+  margin: 0; text-box: trim-both cap alphabetic; }
+.cell-frame p { font-size: 15px; line-height: var(--leading); margin: calc(var(--leading) - 1cap) 0 0;
+  color: color-mix(in srgb, var(--color-text) 78%, transparent);
+  text-box: trim-both cap alphabetic; }
+
+/* — imagery split (the duotone screen print inside a wireframe frame —
+   the figure takes the same marked treatment as every framed object) — */
+.split { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: var(--leading) clamp(24px, 5vw, 96px); align-items: center;
+  padding: calc(2 * var(--leading)) 0 calc(3 * var(--leading)); }
+.split-title { font-family: var(--font-heading); font-weight: var(--font-heading-weight);
+  font-size: 32px; line-height: calc(1.5 * var(--leading)); letter-spacing: 0.02em; text-transform: uppercase;
+  margin: 0; text-box: trim-both cap alphabetic; }
+.split-copy .note { font-size: 15px; line-height: var(--leading);
+  color: color-mix(in srgb, var(--color-text) 78%, transparent);
+  margin: calc(var(--leading) - 1cap) 0 0; max-width: 48ch; text-box: trim-both cap alphabetic; }
+.split-figure { margin: 0; } /* .blueprint owns the frame: position, the 1px
+     border, and — critically — the overflow exemption that lets the
+     registration crosses live outside the box (.blueprint.duotone
+     { overflow: visible } in styles.css; a bare .duotone clips them) */
+.split-figure > .corner { position: absolute; width: 15px; height: 15px;
+  color: color-mix(in srgb, var(--color-text) 55%, transparent); pointer-events: none; /* the
+     registration crosses overlap the slot by a few px — decorative marks
+     must not eat its hover/drop events (image-slot usage contract) */ }
+.split-figure > .corner::before { content: ""; position: absolute; left: 7px; top: 0; width: 1px; height: 100%; background: currentColor; }
+.split-figure > .corner::after  { content: ""; position: absolute; top: 7px; left: 0; width: 100%; height: 1px; background: currentColor; }
+.split-figure > .corner.tl { top: -8px; left: -8px; }
+.split-figure > .corner.tr { top: -8px; right: -8px; }
+.split-figure > .corner.bl { bottom: -8px; left: -8px; }
+.split-figure > .corner.br { bottom: -8px; right: -8px; }
+.split-figure image-slot { width: 100%; aspect-ratio: 1600 / 1187; } /* the bundled
+   photograph's natural ratio pins the box, so a swapped image cover-crops
+   into the same frame (cover framing is the component's own) */
+
+/* — quote (condensed, uppercase-free — the one lowercase condensed moment;
+   hangs at the deck's measured advances) — */
+.quote { padding: calc(2.5 * var(--leading)) 0 calc(3.5 * var(--leading)); }
+.quote blockquote {
+  font-family: var(--font-heading); font-weight: var(--font-heading-weight);
+  font-size: clamp(26px, 2.8vw, 36px); line-height: calc(1.5 * var(--leading));
+  letter-spacing: 0; max-width: 36ch; margin: 0;
+  text-indent: -0.316em; /* hang the opening “ (the deck's measured advance in the Condensed 600) */
+  text-box: trim-both cap alphabetic;
+}
+.quote figcaption { font-size: 15px; line-height: var(--leading);
+  color: color-mix(in srgb, var(--color-text) 70%, transparent); /* small-text ink on the
+     paper ground: 70% measures 5.8:1 (55% is a large-text value here — 3.6:1) */
+  margin: calc(2 * var(--leading) - 1cap) 0 0; /* two grid units below the quote's
+     last baseline — one reads as part of the quote block; the attribution needs air */
+  text-indent: -0.885em; /* hang the leading em-dash + space (measured in Barlow Regular) */
+  text-box: trim-both cap alphabetic; }
+
+@media (max-width: 720px) {
+  /* the phone gutter (--edge bottoms out at 20px) is narrower than the hung
+     marks' measured advances, so a hung “ or em-dash would press into or past
+     the viewport edge — seat the quote flush below this width; the hang
+     returns with the wider gutter */
+  .quote blockquote, .quote figcaption { text-indent: 0; }
+}
+
+/* — close (paper, a caption rule above; the primary is the system's solid
+   accent action — everything else stays a line drawing) — */
+.close { padding: calc(2.5 * var(--leading)) 0 calc(2 * var(--leading)); }
+.close h3 { font-family: var(--font-heading); font-weight: var(--font-heading-weight);
+  font-size: 24px; line-height: var(--leading); letter-spacing: 0.02em; text-transform: uppercase;
+  margin: 0; text-box: trim-both cap alphabetic; }
+.close .sub { font-size: 15px; line-height: var(--leading);
+  color: color-mix(in srgb, var(--color-text) 78%, transparent);
+  margin: calc(var(--leading) - 1cap) 0 0; max-width: var(--measure); text-box: trim-both cap alphabetic; }
+.signup { display: flex; gap: var(--space-3); align-items: stretch; max-width: 480px;
+  margin-top: var(--leading); }
+.signup .input { flex: 1; }
+.signup .input, .signup .btn { min-height: 36px; } /* one control height floor; the row
+  stretches, so whichever of the pair is taller sets both and they read as one row */
+footer { padding: calc(2 * var(--leading)) 0; font-size: 13px; line-height: var(--leading);
+  color: color-mix(in srgb, var(--color-text) 70%, transparent); /* 5.8:1 — see .quote figcaption */ }
+
+/* — responsive collapse — */
+@media (max-width: 880px) {
+  .cells { grid-template-columns: 1fr; gap: calc(var(--leading) + 16px); } /* stacked
+     frames: both cells' crosses overhang 7px of ink into the gap, so the
+     clamp's 20px floor left 6px cross-to-cross — a 40px gap keeps a full
+     unit of air (26px) between the facing crosses */
+}
+@media (max-width: 720px) {
+  .hero { padding-top: calc(2.5 * var(--leading)); }
+  /* the sheet re-stacks: the title block drops its register cells to a
+     second ruled row, and each table row becomes its own small plate —
+     № and property on the register line, the value beneath, the remark
+     last. (Linearizing the table trades its grid semantics for reading
+     order; the row order is unchanged.) */
+  .tb-title { flex-basis: 100%; border-bottom: 1px solid var(--color-divider); }
+  .title-block > .tb-cell { padding-inline: var(--half); flex: 1 0 auto; } /* beats the
+     base span padding's specificity; the cells flex to close the register
+     row against the frame. (All title-block children are spans, so
+     :first-of-type can never name a register cell — the sibling selector
+     below is the one that works) */
+  .tb-title + .tb-cell { border-left: 0; padding-left: var(--leading); } /* first register
+     cell: its hairline would double the plate's own left border */
+  .spec thead { position: absolute; width: 1px; height: 1px; overflow: hidden;
+    clip-path: inset(50%); white-space: nowrap; } /* visually hidden, not
+     display:none — the stacked rows carry their own register (№ + property),
+     so the column heads are redundant on screen, but they stay in the
+     accessibility tree for readers that still expose the table semantics */
+  .spec, .spec tbody, .spec td { display: block; }
+  .spec tr { display: grid; grid-template-columns: max-content 1fr;
+    column-gap: var(--half); row-gap: var(--half); align-items: baseline;
+    padding: var(--leading);
+    border-bottom: 1px solid color-mix(in srgb, var(--color-text) 8%, transparent); }
+  .spec tr:last-child { border-bottom: 0; }
+  .spec th, .spec td { padding: 0; border: 0; }
+  .spec th:first-child, .spec td:first-child { padding-left: 0; } /* matches the
+     desktop rule's specificity, or the № keeps its 24px inset and floats
+     off the stacked rows' shared axis */
+  .spec .s-num { grid-column: 1; }
+  .spec .s-prop { grid-column: 2; }
+  .spec .s-val, .spec .s-rem { grid-column: 1 / -1; }
+  .spec .s-blank { display: none; } /* the desktop table's "no remark" dash
+     would dangle as a stray mark in the stacked row */
+  .split { grid-template-columns: 1fr; }
+  .split-figure { order: -1; }
+}
+@media (max-width: 360px) {
+  /* the narrowest screens: one register row no longer fits, so the title
+     block re-forms as its own grid — doc and revision share a ruled row,
+     the sheet count takes the next — and a wrap can never leave a cell
+     floating without a rule */
+  .title-block { display: grid; grid-template-columns: 1fr 1fr; }
+  .tb-title { grid-column: 1 / -1; border-bottom: 0; } /* the rules move to the cells' tops */
+  .title-block > .tb-cell { border-left: 0; border-top: 1px solid var(--color-divider);
+    padding-left: var(--leading); }
+  .tb-title + .tb-cell + .tb-cell { border-left: 1px solid var(--color-divider);
+    padding-left: var(--half); } /* the revision keeps its divider against the doc cell */
+  .tb-cell:last-child { grid-column: 1 / -1; }
+}
+
+/* — logo mark — */
+.nav-brand { display: inline-flex; align-items: center; gap: 10px; }
+.nav-brand svg { flex: none; color: var(--color-accent-700); }
+
+/* — the agents (the feature-cell grammar, four across, each with a
+     framed duotone portrait slot) — */
+.agents { padding: calc(3 * var(--leading)) 0 calc(2.5 * var(--leading)); }
+.agents > .caption-rule { margin-bottom: calc(var(--leading) + 8px); }
+.agents-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(20px, 2.5vw, 40px); margin-top: calc(var(--leading) - var(--half)); }
+.agent-portrait { margin: 0 0 var(--leading); }
+.agent-portrait image-slot { width: 100%; aspect-ratio: 1 / 1; }
+.agent-role { display: block; font-size: 12px; line-height: var(--half);
+  letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600;
+  color: var(--color-accent-700); font-feature-settings: "tnum" 1;
+  margin: 0 0 var(--half); }
+@media (max-width: 1000px) { .agents-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: calc(var(--leading) + 16px); } }
+@media (max-width: 560px) { .agents-grid { grid-template-columns: 1fr; } }
+/* each cell flexes so the CTA row seats on a shared bottom line */
+.agents-grid .cell-frame { display: flex; flex-direction: column; }
+.agent-cta { margin-top: auto; padding-top: var(--leading); display: flex; flex-direction: column; gap: var(--half); }
+.agent-cta .btn { width: 100%; box-sizing: border-box; text-align: center; justify-content: center; }
+/* the how-to panel: a drawn drawer under the button (native <details>) */
+.howto { border: 1px solid var(--color-divider); }
+.howto summary { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between;
+  gap: var(--half); padding: var(--half); font-size: 12px; line-height: var(--leading);
+  letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; color: var(--color-accent-700); }
+.howto summary::-webkit-details-marker { display: none; }
+.howto summary::after { content: "+"; font-family: var(--font-heading); font-size: 18px; line-height: 1; color: var(--color-accent-700); }
+.howto[open] summary::after { content: "−"; }
+.howto summary:hover { background: color-mix(in srgb, var(--color-accent) 8%, transparent); }
+.howto-body { padding: 0 var(--half) var(--half); border-top: 1px solid var(--color-divider); }
+.howto-body ol { margin: var(--half) 0 0; padding-left: 20px; font-size: 14px; line-height: 21px;
+  color: color-mix(in srgb, var(--color-text) 78%, transparent); }
+.howto-body ol li + li { margin-top: 6px; }
+.howto-body p { margin: var(--half) 0 0; font-size: 13px; line-height: 18px;
+  color: color-mix(in srgb, var(--color-text) 70%, transparent); }
+.howto-body a { color: var(--color-accent-700); }
+
+/* — the trades (ruled rows: trade name in the condensed face, one blunt line) — */
+.trades { padding: calc(2 * var(--leading)) 0 calc(2.5 * var(--leading)); }
+.trade { display: grid; grid-template-columns: minmax(16ch, 3fr) 7fr;
+  gap: var(--half) var(--leading); padding: var(--leading) 0;
+  border-bottom: 1px solid var(--color-divider); align-items: baseline; }
+.trade h3 { font-family: var(--font-heading); font-weight: var(--font-heading-weight);
+  font-size: 22px; line-height: var(--leading); letter-spacing: 0.02em;
+  text-transform: uppercase; margin: 0; }
+.trade p { margin: 0; font-size: 15px; line-height: var(--leading);
+  color: color-mix(in srgb, var(--color-text) 78%, transparent); }
+@media (max-width: 720px) { .trade { grid-template-columns: 1fr; } }
+
+.close .row { display: flex; gap: var(--space-3); flex-wrap: wrap; margin-top: var(--leading); }
+
+/* Review aid: the 24px rhythm drawn as hairlines — debug chrome, toggled by
+   ?baselines or the B key, never part of the look. */
+body[data-baselines] { position: relative; }
+body[data-baselines]::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background:
+    repeating-linear-gradient(to bottom,
+      color-mix(in srgb, var(--color-accent) 35%, transparent) 0 1px,
+      transparent 1px var(--leading)),
+    repeating-linear-gradient(to bottom,
+      transparent 0 var(--half),
+      color-mix(in srgb, var(--color-accent) 16%, transparent) var(--half) calc(var(--half) + 1px),
+      transparent calc(var(--half) + 1px) var(--leading));
+}
+</style>
+
+</head>
+<body>
+<nav class="nav">
+  <span class="nav-brand"><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><rect x="1.5" y="1.5" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1"></rect><path d="M6 14.5 L10 5 L14 14.5 M7.4 11.4 H12.6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"></path></svg>AgentiA Québec</span>
+  <a href="#agents" aria-current="location">Les agents</a>
+  <a href="#offre">L’offre</a>
+  <a href="#metiers">Pour qui</a>
+  <a class="btn btn-primary" href="#demarrer">1 mois gratuit</a>
+</nav>
+<div class="wrap">
+
+  <section class="hero">
+    <h1 class="display"><span class="line">Reste sur le chantier.</span> <span class="line">Le bureau, c’est réglé.</span></h1>
+    <p class="sub">Quatre agents IA — Emily, Sarah, Julie et Sandra — répondent à tes appels, classent tes factures, montent tes rapports comptables et sortent tes soumissions. Toi, tu poses, tu coules, tu câbles. Premier mois gratuit, garanti, sans frais — pis aucun engagement&nbsp;: t’arrêtes quand tu veux.</p>
+    <div class="row">
+      <a class="btn btn-primary" href="https://wa.me/15813337317?text=(Efface%20ce%20texte%20avant%20de%20tester%20%E2%80%94%20rien%20%C3%A0%20envoyer%20par%20%C3%A9crit)%20Pour%20tester%20Emily%20%3A%20appuie%20sur%20l%E2%80%99ic%C3%B4ne%20d%E2%80%99appel%20en%20haut%20de%20la%20conversation%2C%20pis%20parle-lui%20comme%20si%20t%E2%80%99%C3%A9tais%20un%20client%20qui%20appelle%20apr%C3%A8s%20avoir%20vu%20une%20pub." target="_blank" rel="noopener">Appelle Emily sur WhatsApp — 581 333-7317</a>
+      <a class="btn btn-ghost" href="#demarrer">Réserve un appel</a>
+    </div>
+  </section>
+
+  <section class="sheet" id="offre" aria-label="AgentiA — conditions de l’offre">
+    <div class="plate">
+      <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+      <header class="title-block">
+        <span class="tb-title">AgentiA — conditions de l’offre</span>
+        <span class="tb-cell">AQ-2026</span>
+        <span class="tb-cell">Rév. A</span>
+        <span class="tb-cell">Feuille 01 de 05</span>
+      </header>
+      <table class="table spec">
+        <colgroup><col class="c-num"><col class="c-prop"><col class="c-val"><col class="c-rem"></colgroup>
+        <thead>
+          <tr><th scope="col">№</th><th scope="col">Élément</th><th scope="col">Valeur</th><th scope="col">Remarque</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="s-num">01</td><td class="s-prop">Agents au catalogue</td><td class="s-val">4</td><td class="s-rem">Emily · Sarah · Julie · Sandra</td></tr>
+          <tr><td class="s-num">02</td><td class="s-prop">Installation</td><td class="s-val">2 000 $</td><td class="s-rem">Une fois — intégration en 1 semaine</td></tr>
+          <tr><td class="s-num">03</td><td class="s-prop">Abonnement</td><td class="s-val">300 $/mois</td><td class="s-rem">Par agent actif</td></tr>
+          <tr><td class="s-num">04</td><td class="s-prop">Premier mois</td><td class="s-val">0 $</td><td class="s-rem">Garanti, dès la fin de l’intégration</td></tr>
+          <tr><td class="s-num">05</td><td class="s-prop">Référence</td><td class="s-val">−100 $/mois</td><td class="s-rem">Pendant 10 mois, après ton mois gratuit</td></tr>
+          <tr><td class="s-num">06</td><td class="s-prop">Engagement à long terme</td><td class="s-val">Aucun</td><td class="s-rem">Tu peux arrêter en tout temps, sans pénalité</td></tr>
+        </tbody>
+      </table>
+      <p class="sheet-note">Prix en dollars canadiens. Le mois gratuit part quand l’intégration est terminée — pas avant.</p>
+    </div>
+  </section>
+
+  <section class="agents" id="agents">
+    <span class="kicker">02 · L’équipe de bureau</span>
+    <hr class="caption-rule">
+    <div class="agents-grid">
+      <div class="cell-frame">
+        <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+        <figure class="agent-portrait blueprint duotone">
+          <image-slot id="portrait-emily" shape="rect" src="assets/emily.webp" placeholder="Portrait cartoon d’Emily (casque d’écoute)" role="img" aria-label="Emily, agente de réception d’appels"></image-slot>
+          <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+        </figure>
+        <span class="agent-role">Agent 01 · Appels entrants</span>
+        <h2>Emily</h2>
+        <p>Tes clients voient ta pub sur Google, Facebook ou Instagram pis ils appellent&nbsp;: Emily répond, pose les bonnes questions pis préqualifie chaque client dans ton Google&nbsp;Sheet. Toi, tu rappelles juste ceux qui valent la peine.</p>
+        <div class="agent-cta">
+          <a class="btn btn-primary" href="https://wa.me/15813337317?text=(Efface%20ce%20texte%20avant%20de%20tester%20%E2%80%94%20rien%20%C3%A0%20envoyer%20par%20%C3%A9crit)%20Pour%20tester%20Emily%20%3A%20appuie%20sur%20l%E2%80%99ic%C3%B4ne%20d%E2%80%99appel%20en%20haut%20de%20la%20conversation%2C%20pis%20parle-lui%20comme%20si%20t%E2%80%99%C3%A9tais%20un%20client%20qui%20appelle%20apr%C3%A8s%20avoir%20vu%20une%20pub." target="_blank" rel="noopener">Teste Emily — appelle-la sur WhatsApp</a>
+          <details class="howto">
+            <summary>Comment tester Emily</summary>
+            <div class="howto-body">
+              <ol>
+                <li>Le bouton ouvre WhatsApp (ordi ou mobile) sur la conversation d’Emily, avec un petit rappel des étapes dans la barre de texte — efface-le, y a rien à envoyer par écrit. Pas de WhatsApp&nbsp;? Le lien va te proposer de l’installer.</li>
+                <li>Appuie sur l’icône d’appel en haut de la conversation.</li>
+                <li>Mets-toi dans la peau d’un de tes clients qui appelle après avoir vu ta pub&nbsp;: Emily répond, pose ses questions pis préqualifie la demande.</li>
+                <li>Tout ce qu’elle collecte tombe dans un Google&nbsp;Sheet — prêt pour ton rappel.</li>
+              </ol>
+              <p>L’accès au <a href="https://docs.google.com/spreadsheets/d/1gp3__Q6uFn7psn9-wVIfy7gcYjTTMuQzkBUa4flRpiI/edit?usp=sharing" target="_blank" rel="noopener">Google&nbsp;Sheet des résultats</a> se donne pendant la rencontre avec un spécialiste IA.</p>
+            </div>
+          </details>
+        </div>
+      </div>
+      <div class="cell-frame">
+        <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+        <figure class="agent-portrait blueprint duotone">
+          <image-slot id="portrait-sarah" shape="rect" src="assets/sarah.webp" placeholder="Portrait cartoon de Sarah (reçus en main)" role="img" aria-label="Sarah, commis comptable"></image-slot>
+          <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+        </figure>
+        <span class="agent-role">Agent 02 · Commis comptable</span>
+        <h2>Sarah</h2>
+        <p>Envoie-lui une photo de facture sur WhatsApp ou un PDF de la banque. Elle transcrit tout dans un Google&nbsp;Sheet propre. Fini la boîte à chaussures de reçus.</p>
+        <div class="agent-cta">
+          <a class="btn btn-primary" href="https://wa.me/15813337317?text=(Efface%20ce%20texte%20avant%20d%E2%80%99envoyer)%20Pour%20tester%20Sarah%20%3A%20envoie%20directement%20une%20photo%20de%20facture%20ou%20un%20PDF%20de%20relev%C3%A9%20bancaire%20avec%20le%20trombone%20(pi%C3%A8ce%20jointe).%20Rien%20%C3%A0%20%C3%A9crire." target="_blank" rel="noopener">Teste Sarah — envoie une facture</a>
+          <details class="howto">
+            <summary>Comment tester Sarah</summary>
+            <div class="howto-body">
+              <ol>
+                <li>Le bouton ouvre WhatsApp sur la conversation de Sarah, avec un rappel des étapes dans la barre de texte — efface-le avant d’envoyer.</li>
+                <li>Pas besoin d’écrire&nbsp;: appuie sur le trombone (pièce jointe) pis envoie directement une photo de facture ou un PDF de relevé bancaire.</li>
+                <li>Sarah transcrit tout dans un Google&nbsp;Sheet propre — fournisseur, montant, date, taxes.</li>
+              </ol>
+              <p>L’accès au <a href="https://docs.google.com/spreadsheets/d/1gp3__Q6uFn7psn9-wVIfy7gcYjTTMuQzkBUa4flRpiI/edit?usp=sharing" target="_blank" rel="noopener">Google&nbsp;Sheet des résultats</a> se donne pendant la rencontre avec un spécialiste IA.</p>
+            </div>
+          </details>
+        </div>
+      </div>
+      <div class="cell-frame">
+        <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+        <figure class="agent-portrait blueprint duotone">
+          <image-slot id="portrait-julie" shape="rect" src="assets/julie.webp" placeholder="Portrait cartoon de Julie (lunettes, rapports)" role="img" aria-label="Julie, agente CPA"></image-slot>
+          <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+        </figure>
+        <span class="agent-role">Agent 03 · CPA</span>
+        <h2>Julie</h2>
+        <p>Elle prend les chiffres de Sarah et en sort des rapports clairs&nbsp;: où va l’argent, qu’est-ce qui traîne. Elle monte aussi un rapport comptable complet pour vérifier celui de ton comptable humain.</p>
+        <div class="agent-cta">
+          <a class="btn btn-primary" href="https://calendar.google.com/calendar/u/7/r?pli=1" target="_blank" rel="noopener">Julie — prends RV avec un spécialiste</a>
+          <details class="howto">
+            <summary>Pourquoi pas de test direct&nbsp;?</summary>
+            <div class="howto-body">
+              <ol>
+                <li>Julie est une agente de haut niveau&nbsp;: elle travaille avec tes vraies données comptables, pas avec des exemples.</li>
+                <li>Un spécialiste IA te montre son travail en rencontre (Google&nbsp;Meet) et te donne l’accès à ce moment-là.</li>
+                <li>Le bouton ouvre le calendrier pour réserver ta rencontre.</li>
+              </ol>
+              <p>Ses rapports se livrent dans un <a href="https://docs.google.com/spreadsheets/d/1gp3__Q6uFn7psn9-wVIfy7gcYjTTMuQzkBUa4flRpiI/edit?usp=sharing" target="_blank" rel="noopener">Google&nbsp;Sheet</a> partagé pendant la rencontre.</p>
+            </div>
+          </details>
+        </div>
+      </div>
+      <div class="cell-frame">
+        <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+        <figure class="agent-portrait blueprint duotone">
+          <image-slot id="portrait-sandra" shape="rect" src="assets/sandra.webp" placeholder="Portrait cartoon de Sandra (micro, soumission)" role="img" aria-label="Sandra, agente aux soumissions"></image-slot>
+          <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+        </figure>
+        <span class="agent-role">Agent 04 · Soumissions</span>
+        <h2>Sandra</h2>
+        <p>Dicte-lui les infos du chantier en vocal sur WhatsApp. Elle te sort une soumission propre pour ton client avant que t’aies fini ton café.</p>
+        <div class="agent-cta">
+          <a class="btn btn-primary" href="https://wa.me/15813337317?text=(Efface%20ce%20texte%20avant%20d%E2%80%99envoyer)%20Pour%20tester%20Sandra%20%3A%20tiens%20le%20micro%20pis%20laisse%20un%20vocal%20avec%20les%20specs%20de%20ton%20projet.%20Rien%20%C3%A0%20%C3%A9crire." target="_blank" rel="noopener">Teste Sandra — laisse-lui un vocal</a>
+          <details class="howto">
+            <summary>Comment tester Sandra</summary>
+            <div class="howto-body">
+              <ol>
+                <li>Le bouton ouvre WhatsApp sur la conversation de Sandra, avec un rappel des étapes dans la barre de texte — efface-le avant d’envoyer.</li>
+                <li>Rien à écrire&nbsp;: tiens le micro pis laisse directement un vocal avec les specs du projet — fictives ou vraies&nbsp;: client, surface, matériaux, délais.</li>
+                <li>Sandra monte la soumission à partir de ton vocal.</li>
+              </ol>
+              <p>L’accès au <a href="https://docs.google.com/spreadsheets/d/1I5ZrR9sdAQ9FdpgvFlI3J-06C0CXsRgmKhUSuINR3XQ/edit?usp=sharing" target="_blank" rel="noopener">Google&nbsp;Sheet de Sandra</a> se donne pendant la rencontre avec un spécialiste IA.</p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="split" id="histoire">
+    <div class="split-copy">
+      <span class="kicker">03 · Le gars pour qui on a bâti ça</span>
+      <hr class="caption-rule">
+      <h2 class="split-title">Marc, 30 ans, entrepreneur général</h2>
+      <p class="note">Trop de contrats, pas assez de soirées. Le jour, il bâtit. Le soir, il classait des factures, rappelait des numéros manqués pis montait des soumissions à 23&nbsp;h.</p>
+      <p class="note">Aujourd’hui&nbsp;: Emily répond, Sarah classe, Julie compte, Sandra soumissionne. Marc, lui, est sur le chantier — le téléphone reste dans le camion.</p>
+    </div>
+    <figure class="split-figure blueprint duotone">
+      <image-slot id="photo-marc" shape="rect" src="assets/marc.webp" placeholder="Photo&nbsp;: Marc enterré dans la paperasse, le soir, après le chantier" role="img" aria-label="Un entrepreneur général enseveli sous la paperasse du bureau"></image-slot>
+      <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+    </figure>
+  </section>
+
+  <section class="trades" id="metiers">
+    <span class="kicker">04 · Pour qui</span>
+    <hr class="caption-rule">
+    <div class="trade"><h3>Plomberie</h3><p>Les appels d’urgence rentrent pareil — Emily les qualifie pendant que t’as les mains dans un drain.</p></div>
+    <div class="trade"><h3>Électricité</h3><p>Sandra monte la soumission pendant que tu tires du fil.</p></div>
+    <div class="trade"><h3>Construction &amp; réno</h3><p>Sarah classe les factures de matériaux le jour même, pas au mois de mars.</p></div>
+    <div class="trade"><h3>Design de maisons</h3><p>Julie te dit ce que chaque projet rapporte vraiment — avant d’en signer un autre pareil.</p></div>
+    <div class="trade"><h3>Autres métiers de service</h3><p>Si ton bureau te suit dans le camion, on peut t’aider. Appelle, Emily va te le dire.</p></div>
+  </section>
+
+  <section class="quote">
+    <figure>
+      <!-- keep the leading “ — the blockquote's negative text-indent hangs it in the margin -->
+      <blockquote>«&nbsp;Avant, je faisais ma comptabilité le dimanche soir. Là, je regarde la game. Les rapports sont déjà faits.&nbsp;»</blockquote>
+      <!-- keep the leading "— " — the figcaption's negative text-indent hangs it -->
+      <figcaption>— Marc, le gars pour qui on a bâti ça</figcaption>
+    </figure>
+  </section>
+
+  <section class="close" id="demarrer">
+    <span class="kicker">05 · Démarrer</span>
+    <hr class="caption-rule">
+    <h3>Un mois gratuit. Aucun engagement. Sans niaisage.</h3>
+    <p class="sub">On installe tes agents en une semaine (2&nbsp;000&nbsp;$, une fois). Après, ton premier mois est gratuit — garanti, zéro frais, pis il t’engage à rien&nbsp;: t’es pas lié à long terme, tu peux arrêter en tout temps. Ensuite, c’est 300&nbsp;$ par mois par agent. Tu réfères un autre entrepreneur&nbsp;? 100&nbsp;$ de rabais par mois pendant 10&nbsp;mois, après ton mois gratuit.</p>
+    <div class="row">
+      <a class="btn btn-primary" href="https://wa.me/15813337317?text=(Efface%20ce%20texte%20avant%20de%20tester%20%E2%80%94%20rien%20%C3%A0%20envoyer%20par%20%C3%A9crit)%20Pour%20tester%20Emily%20%3A%20appuie%20sur%20l%E2%80%99ic%C3%B4ne%20d%E2%80%99appel%20en%20haut%20de%20la%20conversation%2C%20pis%20parle-lui%20comme%20si%20t%E2%80%99%C3%A9tais%20un%20client%20qui%20appelle%20apr%C3%A8s%20avoir%20vu%20une%20pub." target="_blank" rel="noopener">Appelle Emily sur WhatsApp — 581 333-7317</a>
+      <a class="btn btn-secondary" href="https://calendar.google.com/calendar/u/7/r?pli=1" target="_blank" rel="noopener">Réserve un appel au calendrier</a>
+    </div>
+  </section>
+
+  <footer>AgentiA Québec — des agents IA qui aident les humains de métier, pas qui les remplacent. · 581 333-7317</footer>
+</div>
+<script src="image-slot.js"></script>
+<script>
+// Review aid: baseline-grid overlay — add ?baselines to the URL, or press B to toggle.
+(() => {
+  if (new URLSearchParams(location.search).has('baselines')) document.body.setAttribute('data-baselines', '');
+  addEventListener('keydown', (e) => {
+    const t = e.target;
+    if (t && (t.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName))) return;
+    if ((e.key === 'b' || e.key === 'B') && !e.metaKey && !e.ctrlKey && !e.altKey) document.body.toggleAttribute('data-baselines');
+  });
+})();
+</script>
+
+
+</body></html>
